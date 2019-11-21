@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Taak\Domain.csproj", "{B54E4C9E-BEF8-4E8B-988A-74605977F5AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestMS", "UnitTestMS\UnitTestMS.csproj", "{DCC67454-D240-4E36-A724-BF11B9998C77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B54E4C9E-BEF8-4E8B-988A-74605977F5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B54E4C9E-BEF8-4E8B-988A-74605977F5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B54E4C9E-BEF8-4E8B-988A-74605977F5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B54E4C9E-BEF8-4E8B-988A-74605977F5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC67454-D240-4E36-A724-BF11B9998C77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC67454-D240-4E36-A724-BF11B9998C77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC67454-D240-4E36-A724-BF11B9998C77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC67454-D240-4E36-A724-BF11B9998C77}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F985415-2F88-4656-830E-32874B7DBB34}
+	EndGlobalSection
+EndGlobal
