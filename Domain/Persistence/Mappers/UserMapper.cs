@@ -114,7 +114,6 @@ namespace Domain.Persistence.Mappers
         internal void UpdateUserInDb(User user)
         {
 
-
         }
     }
 }

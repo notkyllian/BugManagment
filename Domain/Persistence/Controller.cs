@@ -57,7 +57,7 @@ namespace Domain.Persistence
 
         #endregion
 
-
+        #region Task
         internal static List<Task> GetTasks()
         {
             var taskMapper = new TaskMapper(ConnectionString);
@@ -81,6 +81,10 @@ namespace Domain.Persistence
             var taskMapper = new TaskMapper(ConnectionString);
             taskMapper.UpdateTaskInDb(task);
         }
+        #endregion
 
+        #region User
+
+        #endregion
     }
 }
