@@ -8,11 +8,7 @@ namespace Persistence
 {
     internal class TaskMapper
     {
-        //Task cannot exist without Bug
-        //For the rest all independent
-
-
-        private readonly string _connectionString = "";
+        private readonly string _connectionString;
 
         internal TaskMapper(string connectionString)
         {
@@ -30,8 +26,7 @@ namespace Persistence
             var dataReader = command.ExecuteReader();
             while (dataReader.Read())
             {
-                TimeSpan timeSpan;
-                TimeSpan.TryParse(Convert.ToString(dataReader["timespent"]), out timeSpan);
+                TimeSpan.TryParse(Convert.ToString(dataReader["timespent"]), out var timeSpan);
                 var task = new Task(
                     Convert.ToInt32(dataReader["id"]),
                     BugRepository.Items.Find(x => x.Id.Equals(Convert.ToInt32(dataReader["bug_id"]))),
@@ -40,12 +35,8 @@ namespace Persistence
                     timeSpan
                 );
                 if (!dataReader.IsDBNull(dataReader.GetOrdinal("user_id")))
-                {
                     task.Employee =
                         (Employee) UserRepository.Items.Find(x => x.Id.Equals(Convert.ToInt32(dataReader["user_id"])));
-                }
-                
-
                 tasks.Add(task);
             }
 

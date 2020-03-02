@@ -77,13 +77,10 @@ namespace UnitTestMS
         {
             var c = new Controller();
 
-            var bug = c.GetBug(1);
-            var task = c.GetTask(1);
 
-            var employee = (Employee) c.GetUser(1);
+            c.RemoveBug(1);
 
-            Assert.AreEqual(task.Employee, employee);
-
+           
         }
     }
 }

@@ -18,9 +18,10 @@ namespace Domain
         {
             if (!_isLoaded)
             {
+                _userRepository.Load(Persistence.Controller.GetUsers());
                 _bugRepository.Load(Persistence.Controller.GetBugs());
                 _taskRepository.Load(Persistence.Controller.GetTasks());
-                _userRepository.Load(Persistence.Controller.GetUsers());
+                
 
                 foreach (var bug in _bugRepository.GetAll())
                     bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == bug.Id).ToList());
