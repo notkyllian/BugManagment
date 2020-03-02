@@ -84,6 +84,5 @@ namespace Persistence
             command.ExecuteNonQuery();
             connection.Close();
         }
-
     }
 }

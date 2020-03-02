@@ -49,7 +49,5 @@ namespace Domain.Business.Repositories
                     maxId = e.Id;
             return maxId + 1;
         }
-
-
     }
 }

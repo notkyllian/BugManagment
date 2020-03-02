@@ -38,7 +38,7 @@ namespace Persistence
                     Convert.ToString(dataReader["description"]),
                     Convert.ToInt32(dataReader["size"]),
                     timeSpan
-                    );
+                );
                 tasks.Add(task);
             }
 
@@ -94,6 +94,5 @@ namespace Persistence
             command.ExecuteNonQuery();
             connection.Close();
         }
-
     }
 }

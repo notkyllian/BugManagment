@@ -12,9 +12,11 @@ namespace UnitTestMS
         {
             var _c = new Controller();
 
-            _c.AddEmployee("Dirk");
-            _c.AddUser("Wilma");
-            _c.AddProjectmanager("Jens");
+            var emp = _c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
+            var pm = _c.AddProjectmanager("Jens", DateTime.Now, "Jens", "test");
+
+
+            _c.AddEmployeeToProject(pm, emp);
 
             Assert.AreEqual(_c.GetUsers().Count, 3);
         }
@@ -25,8 +27,8 @@ namespace UnitTestMS
             var _c = new Controller();
             var _c2 = new Controller();
 
-            _c.AddUser("TestUser1");
-            _c2.AddUser("TestUser2");
+            _c.AddUser("TestUser1", DateTime.Now, "Test", "test");
+            _c2.AddUser("TestUser2", DateTime.Now, "Test2", "test");
 
             Assert.AreEqual(_c.GetUsers().Count, _c2.GetUsers().Count);
         }
@@ -36,7 +38,7 @@ namespace UnitTestMS
         {
             var _c = new Controller();
 
-            var employee = _c.AddEmployee("Dirk");
+            var employee = _c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
             var bug = _c.AddBug("Error 404 on index.php page");
             var task = _c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
             _c.AddTaskToEmployee(task, employee);
@@ -49,11 +51,11 @@ namespace UnitTestMS
         {
             var _c = new Controller();
 
-            var user = _c.AddUser("Philip");
-            user.Naam = "Philip2";
+            var user = _c.AddUser("Philip", DateTime.Now, "Philip", "test");
+            user.Name = "Philip2";
             _c.UpdateUser(user);
 
-            Assert.AreEqual(_c.GetUser(1).Naam, "Philip2");
+            Assert.AreEqual(_c.GetUser(user.Id).Name, "Philip2");
         }
 
         [TestMethod]
@@ -61,7 +63,7 @@ namespace UnitTestMS
         {
             var _c = new Controller();
 
-            var employee = _c.AddEmployee("Dirk");
+            var employee = _c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
             var bug = _c.AddBug("Error 404 on index.php page");
             var task = _c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
             _c.AddTaskToEmployee(task, employee);
@@ -73,13 +75,7 @@ namespace UnitTestMS
         public void TestDB()
         {
             var c = new Controller();
-            var c2 = new Controller();
-
-            var bug = c.GetBug(1);
-            var task = c.AddTask(bug, 1, "Testing", TimeSpan.Zero);
-            c.RemoveTask(bug, task.Id);
-
-            Assert.AreEqual(bug.GetTaskCount(), 3);
+            c.RemoveUser(2);
         }
     }
 }

@@ -5,7 +5,6 @@ namespace Domain.Business.Repositories
 {
     internal class UserRepository : Repository<User>
     {
-
         internal override void AddItem(User entity)
         {
             Items.Add(entity);
@@ -24,9 +23,9 @@ namespace Domain.Business.Repositories
 
         internal override void RemoveItem(int id)
         {
-            Persistence.Controller.DeleteUser(GetItem(id));
-            Items.Remove(GetItem(id));
-
+            var item = GetItem(id);
+            Persistence.Controller.DeleteUser(item);
+            Items.Remove(item);
         }
 
         internal override void Load(List<User> itemList)
@@ -36,11 +35,17 @@ namespace Domain.Business.Repositories
 
         internal override User UpdateItem(User entity)
         {
+            var item = GetItem(entity.Id);
+
+            item.Birthday = entity.Birthday;
+            item.Name = entity.Name;
+            item.Username = entity.Username;
+            item.Password = entity.Password;
+
+
             Persistence.Controller.UpdateUser(entity);
 
-
-
-            throw new System.NotImplementedException();
+            return GetItem(entity.Id);
         }
     }
 }

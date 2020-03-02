@@ -18,10 +18,9 @@ namespace Domain.Persistence
             {
                 if (_connectionString == "")
                 {
-                    if (ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).ConnectionStrings.ConnectionStrings.Count == 0)
-                    {
-                        throw new Exception("Connection string not configured");
-                    }
+                    if (ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location)
+                            .ConnectionStrings.ConnectionStrings.Count ==
+                        0) throw new Exception("Connection string not configured");
 
                     _connectionString = ConfigurationManager
                         .OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).ConnectionStrings
@@ -31,7 +30,9 @@ namespace Domain.Persistence
                 return _connectionString;
             }
         }
+
         #region Bug
+
         internal static List<Bug> GetBugs()
         {
             var bugMapper = new BugMapper(ConnectionString);
@@ -59,6 +60,7 @@ namespace Domain.Persistence
         #endregion
 
         #region Task
+
         internal static List<Task> GetTasks()
         {
             var taskMapper = new TaskMapper(ConnectionString);
@@ -82,9 +84,11 @@ namespace Domain.Persistence
             var taskMapper = new TaskMapper(ConnectionString);
             taskMapper.UpdateTaskInDb(task);
         }
+
         #endregion
 
         #region User
+
         internal static List<User> GetUsers()
         {
             var userMapper = new UserMapper(ConnectionString);
@@ -96,16 +100,19 @@ namespace Domain.Persistence
             var userMapper = new UserMapper(ConnectionString);
             userMapper.AddUserToDb(user);
         }
+
         internal static void UpdateUser(User user)
         {
             var userMapper = new UserMapper(ConnectionString);
             userMapper.UpdateUserInDb(user);
         }
+
         internal static void DeleteUser(User user)
         {
             var userMapper = new UserMapper(ConnectionString);
             userMapper.DeleteUserInDb(user);
         }
+
         #endregion
     }
 }

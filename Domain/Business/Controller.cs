@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain.Business.Entities;
 using Domain.Business.Repositories;
-using System.Linq;
 
 namespace Domain
 {
     public class Controller
     {
-        private static bool _isLoaded = false;
+        private static readonly bool _isLoaded = false;
 
-        private static UserRepository _userRepository = new UserRepository();
-        private static TaskRepository _taskRepository = new TaskRepository();
-        private static BugRepository _bugRepository = new BugRepository();
+        private static readonly UserRepository _userRepository = new UserRepository();
+        private static readonly TaskRepository _taskRepository = new TaskRepository();
+        private static readonly BugRepository _bugRepository = new BugRepository();
 
         public Controller()
         {
@@ -21,13 +21,9 @@ namespace Domain
                 _bugRepository.Load(Persistence.Controller.GetBugs());
                 _taskRepository.Load(Persistence.Controller.GetTasks());
                 foreach (var Bug in _bugRepository.GetAll())
-                {
                     Bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == Bug.Id).ToList());
-                }
                 _userRepository.Load(Persistence.Controller.GetUsers());
-
             }
-
         }
 
 
@@ -42,7 +38,7 @@ namespace Domain
 
         public Employee AddEmployee(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new Employee(_userRepository.GetNextId(), naam, birthday, username, password);
+            var toAdd = new Employee(_userRepository.GetNextId(), naam, birthday, password, username);
             _userRepository.AddItem(toAdd);
             return toAdd;
         }
@@ -56,11 +52,7 @@ namespace Domain
 
         public User UpdateUser(User user)
         {
-
-            if (_userRepository.GetItem(user.Id) != null)
-            {
-                return _userRepository.UpdateItem(user);
-            }
+            if (_userRepository.GetItem(user.Id) != null) return _userRepository.UpdateItem(user);
             throw new Exception("User with id: " + user.Id + " not found.");
         }
 
@@ -100,10 +92,7 @@ namespace Domain
 
         public Task UpdateTask(Task task)
         {
-            if (_taskRepository.GetItem(task.Id) != null)
-            {
-                return _taskRepository.UpdateItem(task);
-            }
+            if (_taskRepository.GetItem(task.Id) != null) return _taskRepository.UpdateItem(task);
             throw new Exception("Task with id: " + task.Id + " not found.");
         }
 
@@ -124,7 +113,9 @@ namespace Domain
                 _taskRepository.RemoveItem(id);
             }
             else
+            {
                 throw new Exception("User with id: " + id + " not found.");
+            }
         }
 
         public void AddTaskToUser(int id, Employee user)
@@ -152,10 +143,7 @@ namespace Domain
 
         public Bug UpdateBug(Bug bug)
         {
-            if (_bugRepository.GetItem(bug.Id) != null)
-            {
-                return _bugRepository.UpdateItem(bug);
-            }
+            if (_bugRepository.GetItem(bug.Id) != null) return _bugRepository.UpdateItem(bug);
             throw new Exception("Bug with id: " + bug.Id + " not found.");
         }
 
@@ -172,14 +160,13 @@ namespace Domain
             var toRemove = _bugRepository.GetItem(id);
             if (toRemove != null)
             {
-                foreach (var task in toRemove._tasks)
-                {
-                    _taskRepository.RemoveItem(task.Id);
-                }
+                foreach (var task in toRemove._tasks) _taskRepository.RemoveItem(task.Id);
                 _bugRepository.RemoveItem(id);
             }
             else
+            {
                 throw new Exception("Bug with id: " + id + " not found.");
+            }
         }
 
         public List<Bug> GetBugList()
@@ -190,7 +177,6 @@ namespace Domain
         #endregion
 
         #region Functions
-
 
         public void AddTaskToEmployee(Task task, Employee employee)
         {
@@ -206,7 +192,6 @@ namespace Domain
         public void AddEmployeeToProject(Projectmanager projectmanager, Employee employee)
         {
             projectmanager.addEmployee(employee);
-            UpdateUser(projectmanager);
             UpdateUser(employee);
         }
 

@@ -6,7 +6,6 @@ namespace Domain.Business.Repositories
 {
     internal class BugRepository : Repository<Bug>
     {
-
         internal override void AddItem(Bug bug)
         {
             Items.Add(bug);
@@ -25,7 +24,7 @@ namespace Domain.Business.Repositories
 
         internal override void RemoveItem(int id)
         {
-            Bug bug = GetItem(id);
+            var bug = GetItem(id);
             Items.Remove(bug);
             Persistence.Controller.RemoveBug(bug);
         }

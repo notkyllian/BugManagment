@@ -6,7 +6,6 @@ namespace Domain.Business.Repositories
 {
     internal class TaskRepository : Repository<Task>
     {
-
         internal override void AddItem(Task entity)
         {
             Items.Add(entity);
@@ -25,7 +24,7 @@ namespace Domain.Business.Repositories
 
         internal override void RemoveItem(int id)
         {
-            Task task = GetItem(id);
+            var task = GetItem(id);
             Items.Remove(task);
             Persistence.Controller.RemoveTask(task);
         }

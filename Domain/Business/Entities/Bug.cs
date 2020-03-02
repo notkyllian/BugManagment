@@ -15,7 +15,6 @@ namespace Domain.Business.Entities
         public string Description { get; set; }
 
 
-
         public int GetTaskCount()
         {
             return _tasks.Count;

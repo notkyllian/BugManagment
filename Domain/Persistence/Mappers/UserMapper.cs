@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Domain.Business.Entities;
+using Domain.Business.Repositories;
 using MySql.Data.MySqlClient;
 
 namespace Domain.Persistence.Mappers
@@ -42,6 +44,27 @@ namespace Domain.Persistence.Mappers
 
             return employees;
         }
+
+        private Projectmanager getProjectmanagerFromEmployee(User employee)
+        {
+            var users = new List<Projectmanager>();
+            users = UserRepository.Items.OfType<Projectmanager>().ToList();
+
+
+            Projectmanager returnProjectmanager = null;
+
+            foreach (var user in users)
+                if (user.GetType() == typeof(Projectmanager))
+                {
+                    var pm = user;
+                    if (pm.GetEmployees().Contains((Employee) employee))
+                        returnProjectmanager = pm;
+                }
+
+
+            return returnProjectmanager;
+        }
+
 
         internal List<User> GetUsersFromDb()
         {
@@ -113,18 +136,32 @@ namespace Domain.Persistence.Mappers
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
-                "UPDATE tbluser SET name = @name, birthday = @birthday, rol = @rol, username = @username, password = @password" +
+                "UPDATE tbluser SET name = @name, birthday = @birthday, rol = @rol, username = @username, password = @password, projectmanager_id = @projectmanager_id" +
                 " WHERE id=@id"
                 , connection);
+            command.Parameters.AddWithValue("name", user.Name);
             command.Parameters.AddWithValue("id", user.Id);
             command.Parameters.AddWithValue("birthday", user.Birthday);
             command.Parameters.AddWithValue("username", user.Username);
             command.Parameters.AddWithValue("password", user.Password);
 
 
-            if (user.GetType() == typeof(Employee)) command.Parameters.AddWithValue("rol", "employee");
-            else if (user.GetType() == typeof(Projectmanager)) command.Parameters.AddWithValue("rol", "projectmanager");
-            else command.Parameters.AddWithValue("rol", DBNull.Value);
+            if (user.GetType() == typeof(Employee))
+            {
+                command.Parameters.AddWithValue("rol", "employee");
+                var pm = getProjectmanagerFromEmployee(user);
+                if (pm != null) command.Parameters.AddWithValue("projectmanager_id", pm.Id);
+                else command.Parameters.AddWithValue("projectmanager_id", DBNull.Value);
+            }
+
+            else if (user.GetType() == typeof(Projectmanager))
+            {
+                command.Parameters.AddWithValue("rol", "projectmanager");
+            }
+            else
+            {
+                command.Parameters.AddWithValue("rol", DBNull.Value);
+            }
 
             connection.Open();
             command.ExecuteNonQuery();
@@ -139,13 +176,13 @@ namespace Domain.Persistence.Mappers
             //clean out
             if (user.GetType() == typeof(Projectmanager))
             {
-                Projectmanager pm = (Projectmanager)user;
-                foreach (Employee werknemer in pm.GetEmployees())
+                var pm = (Projectmanager) user;
+                foreach (var werknemer in pm.GetEmployees())
                 {
                     command = new MySqlCommand(
-                       "UPDATE tbluser SET projectmanager_id = @id " +
-                       " WHERE id=@id"
-                       , connection);
+                        "UPDATE tbluser SET projectmanager_id = null " +
+                        " WHERE id=@id"
+                        , connection);
                     command.Parameters.AddWithValue("id", werknemer.Id);
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -165,6 +202,5 @@ namespace Domain.Persistence.Mappers
             command.ExecuteNonQuery();
             connection.Close();
         }
-
     }
 }

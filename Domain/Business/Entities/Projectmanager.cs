@@ -7,7 +7,8 @@ namespace Domain.Business.Entities
     {
         private readonly List<Employee> _employees; //Employees to manage
 
-        internal Projectmanager(int id, string name, DateTime birthday, string password, string username) : base(id, name,
+        internal Projectmanager(int id, string name, DateTime birthday, string password, string username) : base(id,
+            name,
             birthday, password, username)
         {
             _employees = new List<Employee>();
@@ -20,10 +21,12 @@ namespace Domain.Business.Entities
 
         internal void Load(List<Employee> employees)
         {
-            foreach (var employee in employees)
-            {
-                _employees.Add(employee);
-            }
+            foreach (var employee in employees) _employees.Add(employee);
+        }
+
+        internal List<Employee> GetEmployees()
+        {
+            return _employees;
         }
     }
 }
