@@ -20,9 +20,12 @@ namespace Domain
             {
                 _bugRepository.Load(Persistence.Controller.GetBugs());
                 _taskRepository.Load(Persistence.Controller.GetTasks());
-                foreach (var Bug in _bugRepository.GetAll())
-                    Bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == Bug.Id).ToList());
                 _userRepository.Load(Persistence.Controller.GetUsers());
+
+                foreach (var bug in _bugRepository.GetAll())
+                    bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == bug.Id).ToList());
+                foreach (var employee in _userRepository.GetAll().OfType<Employee>())
+                    employee.Load(_taskRepository.GetAll().Where(x => x.Employee.Id == employee.Id).ToList());
             }
         }
 
@@ -182,11 +185,13 @@ namespace Domain
         {
             employee.AddTask(task);
             task.Employee = employee;
+            UpdateTask(task);
         }
 
         public void AddTimeToTask(Task task, TimeSpan time)
         {
             task.AddTime(time);
+            UpdateTask(task);
         }
 
         public void AddEmployeeToProject(Projectmanager projectmanager, Employee employee)

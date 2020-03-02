@@ -17,5 +17,10 @@ namespace Domain.Business.Entities
         {
             _todo.Add(task);
         }
+
+        internal void Load(List<Task> tasks)
+        {
+            _todo.AddRange(tasks);
+        }
     }
 }

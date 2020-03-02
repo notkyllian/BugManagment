@@ -1,5 +1,6 @@
 using System;
 using Domain;
+using Domain.Business.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestMS
@@ -75,7 +76,14 @@ namespace UnitTestMS
         public void TestDB()
         {
             var c = new Controller();
-            c.RemoveUser(2);
+
+            var bug = c.GetBug(1);
+            var task = c.GetTask(1);
+
+            var employee = (Employee) c.GetUser(1);
+
+            Assert.AreEqual(task.Employee, employee);
+
         }
     }
 }

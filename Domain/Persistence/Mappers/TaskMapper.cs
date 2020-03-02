@@ -39,6 +39,13 @@ namespace Persistence
                     Convert.ToInt32(dataReader["size"]),
                     timeSpan
                 );
+                if (!dataReader.IsDBNull(dataReader.GetOrdinal("user_id")))
+                {
+                    task.Employee =
+                        (Employee) UserRepository.Items.Find(x => x.Id.Equals(Convert.ToInt32(dataReader["user_id"])));
+                }
+                
+
                 tasks.Add(task);
             }
 
@@ -70,13 +77,14 @@ namespace Persistence
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
-                "UPDATE tbltask SET description = @description, size = @size, timespent = @timespent" +
+                "UPDATE tbltask SET description = @description, size = @size, timespent = @timespent, user_id = @user_id" +
                 " WHERE id=@id"
                 , connection);
             command.Parameters.AddWithValue("id", task.Id);
             command.Parameters.AddWithValue("description", task.Description);
             command.Parameters.AddWithValue("timespent", task.TimeSpent);
             command.Parameters.AddWithValue("size", task.Size);
+            command.Parameters.AddWithValue("user_id", task.Employee.Id);
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();

@@ -10,6 +10,7 @@ namespace Domain.Business.Entities
             Size = size;
             TimeSpent = timeSpent;
             Description = description;
+            Employee = null;
         }
 
         public Employee Employee { get; internal set; }
