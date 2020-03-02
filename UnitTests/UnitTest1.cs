@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Domain;
 using Domain.Business.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,40 +12,48 @@ namespace UnitTestMS
         [TestMethod]
         public void TestUserInheritance()
         {
-            var _c = new Controller();
+            var c = new Controller();
 
-            var emp = _c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
-            var pm = _c.AddProjectmanager("Jens", DateTime.Now, "Jens", "test");
+            var emp = c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
+            var pm = c.AddProjectmanager("Jens", DateTime.Now, "Jens", "test");
 
 
-            _c.AddEmployeeToProject(pm, emp);
+            c.AddEmployeeToProject(pm, emp);
 
-            Assert.AreEqual(_c.GetUsers().Count, 3);
+            Assert.AreEqual(c.GetUsers().Count, 2);
+
+            c.RemoveUser(emp.Id);
+            c.RemoveUser(pm.Id);
         }
 
         [TestMethod]
         public void TestControllerData()
         {
-            var _c = new Controller();
-            var _c2 = new Controller();
+            var c = new Controller();
+            var c2 = new Controller();
 
-            _c.AddUser("TestUser1", DateTime.Now, "Test", "test");
-            _c2.AddUser("TestUser2", DateTime.Now, "Test2", "test");
+            var u1 = c.AddUser("TestUser1", DateTime.Now, "Test", "test");
+            var u2 = c2.AddUser("TestUser2", DateTime.Now, "Test2", "test");
 
-            Assert.AreEqual(_c.GetUsers().Count, _c2.GetUsers().Count);
+            Assert.AreEqual(c.GetUsers().Count, c2.GetUsers().Count);
+
+            c.RemoveUser(u1.Id);
+            c.RemoveUser(u2.Id);
         }
 
         [TestMethod]
         public void TestTaskLogic()
         {
-            var _c = new Controller();
+            var c = new Controller();
 
-            var employee = _c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
-            var bug = _c.AddBug("Error 404 on index.php page");
-            var task = _c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
-            _c.AddTaskToEmployee(task, employee);
+            var employee = c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
+            var bug = c.AddBug("Error 404 on index.php page");
+            var task = c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
+            c.AddTaskToEmployee(task, employee);
 
-            Assert.AreEqual(_c.GetBug(1).GetTaskCount(), 1);
+            Assert.AreEqual(c.GetBug(1).GetTaskCount(), 1);//TODO fix the fact that I can't remove user because connection between user and task
+
+            c.RemoveUser(employee.Id);
         }
 
         [TestMethod]
@@ -72,15 +81,6 @@ namespace UnitTestMS
             Assert.AreEqual(_c.GetTask(1).Employee, employee);
         }
 
-        [TestMethod]
-        public void TestDB()
-        {
-            var c = new Controller();
-
-
-            c.RemoveBug(1);
-
-           
-        }
+        
     }
 }

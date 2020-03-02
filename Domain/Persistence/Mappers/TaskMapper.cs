@@ -15,6 +15,7 @@ namespace Persistence
             _connectionString = connectionString;
         }
 
+
         internal List<Task> GetTaskFromDb()
         {
             var tasks = new List<Task>();
