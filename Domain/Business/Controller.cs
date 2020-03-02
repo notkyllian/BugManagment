@@ -22,46 +22,45 @@ namespace Domain
                 _taskRepository.Load(Persistence.Controller.GetTasks());
                 foreach (var Bug in _bugRepository.GetAll())
                 {
-                   Bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == Bug.Id).ToList());
+                    Bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == Bug.Id).ToList());
                 }
+                _userRepository.Load(Persistence.Controller.GetUsers());
+
             }
-            
+
         }
 
 
         #region User
 
-        public User AddUser(string naam)
+        public User AddUser(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new User(_userRepository.GetNextId(), naam);
+            var toAdd = new User(_userRepository.GetNextId(), naam, birthday, username, password);
             _userRepository.AddItem(toAdd);
             return toAdd;
         }
 
-        public Employee AddEmployee(string naam)
+        public Employee AddEmployee(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new Employee(_userRepository.GetNextId(), naam);
+            var toAdd = new Employee(_userRepository.GetNextId(), naam, birthday, username, password);
             _userRepository.AddItem(toAdd);
             return toAdd;
         }
 
-        public Projectmanager AddProjectmanager(string naam)
+        public Projectmanager AddProjectmanager(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new Projectmanager(_userRepository.GetNextId(), naam);
+            var toAdd = new Projectmanager(_userRepository.GetNextId(), naam, birthday, username, password);
             _userRepository.AddItem(toAdd);
             return toAdd;
         }
 
         public User UpdateUser(User user)
         {
-            var toUpdate = _userRepository.GetItem(user.Id);
-            if (toUpdate != null)
-            {
-                _userRepository.RemoveItem(toUpdate.Id);
-                _userRepository.AddItem(toUpdate);
-                return toUpdate;
-            }
 
+            if (_userRepository.GetItem(user.Id) != null)
+            {
+                return _userRepository.UpdateItem(user);
+            }
             throw new Exception("User with id: " + user.Id + " not found.");
         }
 
@@ -172,7 +171,13 @@ namespace Domain
         {
             var toRemove = _bugRepository.GetItem(id);
             if (toRemove != null)
+            {
+                foreach (var task in toRemove._tasks)
+                {
+                    _taskRepository.RemoveItem(task.Id);
+                }
                 _bugRepository.RemoveItem(id);
+            }
             else
                 throw new Exception("Bug with id: " + id + " not found.");
         }
@@ -201,6 +206,8 @@ namespace Domain
         public void AddEmployeeToProject(Projectmanager projectmanager, Employee employee)
         {
             projectmanager.addEmployee(employee);
+            UpdateUser(projectmanager);
+            UpdateUser(employee);
         }
 
         #endregion

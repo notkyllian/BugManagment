@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 using Domain.Business.Entities;
+using Domain.Persistence.Mappers;
 using Persistence;
 
 namespace Domain.Persistence
@@ -26,7 +27,7 @@ namespace Domain.Persistence
                         .OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).ConnectionStrings
                         .ConnectionStrings["Database"].ConnectionString;
                 }
-                    
+
                 return _connectionString;
             }
         }
@@ -84,7 +85,27 @@ namespace Domain.Persistence
         #endregion
 
         #region User
+        internal static List<User> GetUsers()
+        {
+            var userMapper = new UserMapper(ConnectionString);
+            return userMapper.GetUsersFromDb();
+        }
 
+        internal static void AddUser(User user)
+        {
+            var userMapper = new UserMapper(ConnectionString);
+            userMapper.AddUserToDb(user);
+        }
+        internal static void UpdateUser(User user)
+        {
+            var userMapper = new UserMapper(ConnectionString);
+            userMapper.UpdateUserInDb(user);
+        }
+        internal static void DeleteUser(User user)
+        {
+            var userMapper = new UserMapper(ConnectionString);
+            userMapper.DeleteUserInDb(user);
+        }
         #endregion
     }
 }

@@ -9,6 +9,7 @@ namespace Domain.Business.Repositories
         internal override void AddItem(User entity)
         {
             Items.Add(entity);
+            Persistence.Controller.AddUser(entity);
         }
 
         internal override User GetItem(int id)
@@ -23,7 +24,9 @@ namespace Domain.Business.Repositories
 
         internal override void RemoveItem(int id)
         {
+            Persistence.Controller.DeleteUser(GetItem(id));
             Items.Remove(GetItem(id));
+
         }
 
         internal override void Load(List<User> itemList)
@@ -33,6 +36,10 @@ namespace Domain.Business.Repositories
 
         internal override User UpdateItem(User entity)
         {
+            Persistence.Controller.UpdateUser(entity);
+
+
+
             throw new System.NotImplementedException();
         }
     }

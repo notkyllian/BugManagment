@@ -43,7 +43,7 @@ namespace Domain.Persistence.Mappers
             return employees;
         }
 
-        internal List<User> GetTaskFromDb()
+        internal List<User> GetUsersFromDb()
         {
             var users = new List<User>();
 
@@ -73,12 +73,10 @@ namespace Domain.Persistence.Mappers
                         var employee = new Employee(id, name, birthday, password, username);
                         users.Add(employee);
                         break;
-                    case "user":
+                    default:
                         var user = new User(id, name, birthday, password, username);
                         users.Add(user);
                         break;
-                    default:
-                        throw new Exception("Invalid usertype");
                 }
             }
 
@@ -91,13 +89,13 @@ namespace Domain.Persistence.Mappers
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
-                "INSERT INTO tbltask (id, name, birthday, rol, username, password)" +
+                "INSERT INTO tbluser (id, name, birthday, rol, username, password)" +
                 " VALUES (@id, @name, @birthday, @rol, @username, @password)"
                 , connection);
-            if (user.GetType() == typeof(User)) command.Parameters.AddWithValue("rol", DBNull.Value);
-            if (user.GetType() == typeof(Employee)) command.Parameters.AddWithValue("rol", "employee");
-            if (user.GetType() == typeof(Projectmanager)) command.Parameters.AddWithValue("rol", "projectmanager");
 
+            if (user.GetType() == typeof(Employee)) command.Parameters.AddWithValue("rol", "employee");
+            else if (user.GetType() == typeof(Projectmanager)) command.Parameters.AddWithValue("rol", "projectmanager");
+            else command.Parameters.AddWithValue("rol", DBNull.Value);
 
             command.Parameters.AddWithValue("id", user.Id);
             command.Parameters.AddWithValue("name", user.Name);
@@ -113,7 +111,60 @@ namespace Domain.Persistence.Mappers
 
         internal void UpdateUserInDb(User user)
         {
+            var connection = new MySqlConnection(_connectionString);
+            var command = new MySqlCommand(
+                "UPDATE tbluser SET name = @name, birthday = @birthday, rol = @rol, username = @username, password = @password" +
+                " WHERE id=@id"
+                , connection);
+            command.Parameters.AddWithValue("id", user.Id);
+            command.Parameters.AddWithValue("birthday", user.Birthday);
+            command.Parameters.AddWithValue("username", user.Username);
+            command.Parameters.AddWithValue("password", user.Password);
 
+
+            if (user.GetType() == typeof(Employee)) command.Parameters.AddWithValue("rol", "employee");
+            else if (user.GetType() == typeof(Projectmanager)) command.Parameters.AddWithValue("rol", "projectmanager");
+            else command.Parameters.AddWithValue("rol", DBNull.Value);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
         }
+
+        internal void DeleteUserInDb(User user)
+        {
+            var connection = new MySqlConnection(_connectionString);
+            var command = new MySqlCommand();
+
+            //clean out
+            if (user.GetType() == typeof(Projectmanager))
+            {
+                Projectmanager pm = (Projectmanager)user;
+                foreach (Employee werknemer in pm.GetEmployees())
+                {
+                    command = new MySqlCommand(
+                       "UPDATE tbluser SET projectmanager_id = @id " +
+                       " WHERE id=@id"
+                       , connection);
+                    command.Parameters.AddWithValue("id", werknemer.Id);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    command.Parameters.Clear();
+                }
+            }
+
+
+            command = new MySqlCommand(
+                "DELETE FROM tbluser" +
+                " WHERE id=@id"
+                , connection);
+            command.Parameters.AddWithValue("id", user.Id);
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+        }
+
     }
 }
