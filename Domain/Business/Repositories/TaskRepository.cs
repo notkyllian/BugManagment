@@ -42,7 +42,7 @@ namespace Domain.Business.Repositories
             item.Size = entity.Size;
             item.TimeSpent = entity.TimeSpent;
             Persistence.Controller.UpdateTask(item);
-            return GetItem(entity.Id);
+            return GetItem(item.Id);
         }
     }
 }

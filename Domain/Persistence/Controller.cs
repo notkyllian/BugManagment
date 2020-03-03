@@ -10,6 +10,7 @@ namespace Domain.Persistence
 {
     internal static class Controller
     {
+        
         private static string _connectionString = "";
 
         private static string ConnectionString

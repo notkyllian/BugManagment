@@ -43,9 +43,9 @@ namespace Domain.Business.Repositories
             item.Password = entity.Password;
 
 
-            Persistence.Controller.UpdateUser(entity);
+            Persistence.Controller.UpdateUser(item);
 
-            return GetItem(entity.Id);
+            return GetItem(item.Id);
         }
     }
 }

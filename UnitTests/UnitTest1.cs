@@ -71,14 +71,12 @@ namespace UnitTestMS
         [TestMethod]
         public void TestTaskToEmployeeComposition()
         {
-            var _c = new Controller();
+            var c = new Controller();
+            c.AddBug("Nigga");
+            c.AddTask(c.GetBug(1), 10, "Bruh");
 
-            var employee = _c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
-            var bug = _c.AddBug("Error 404 on index.php page");
-            var task = _c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
-            _c.AddTaskToEmployee(task, employee);
 
-            Assert.AreEqual(_c.GetTask(1).Employee, employee);
+
         }
 
         

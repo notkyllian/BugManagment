@@ -30,14 +30,14 @@ namespace Persistence
                 TimeSpan.TryParse(Convert.ToString(dataReader["timespent"]), out var timeSpan);
                 var task = new Task(
                     Convert.ToInt32(dataReader["id"]),
-                    BugRepository.Items.Find(x => x.Id.Equals(Convert.ToInt32(dataReader["bug_id"]))),
+                    BugRepository.Items.Find(x => x.Id == (Convert.ToInt32(dataReader["bug_id"]))),
                     Convert.ToString(dataReader["description"]),
                     Convert.ToInt32(dataReader["size"]),
                     timeSpan
                 );
                 if (!dataReader.IsDBNull(dataReader.GetOrdinal("user_id")))
                     task.Employee =
-                        (Employee) UserRepository.Items.Find(x => x.Id.Equals(Convert.ToInt32(dataReader["user_id"])));
+                        (Employee) UserRepository.Items.Find(x => x.Id == Convert.ToInt32(dataReader["user_id"]));
                 tasks.Add(task);
             }
 

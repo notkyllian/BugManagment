@@ -21,7 +21,7 @@ namespace Domain
                 _userRepository.Load(Persistence.Controller.GetUsers());
                 _bugRepository.Load(Persistence.Controller.GetBugs());
                 _taskRepository.Load(Persistence.Controller.GetTasks());
-                
+
 
                 foreach (var bug in _bugRepository.GetAll())
                     bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == bug.Id).ToList());
@@ -86,8 +86,9 @@ namespace Domain
 
         #region Task
 
-        public Task AddTask(Bug bug, int size, string description, TimeSpan timeSpent)
+        public Task AddTask(Bug bug, int size, string description, TimeSpan? maxWait = null)
         {
+            var timeSpent = maxWait ?? TimeSpan.Zero;
             var toAdd = new Task(_taskRepository.GetNextId(), bug, description, size, timeSpent);
             bug._tasks.Add(toAdd);
             _taskRepository.AddItem(toAdd);
@@ -163,14 +164,10 @@ namespace Domain
         {
             var toRemove = _bugRepository.GetItem(id);
             if (toRemove != null)
-            {
-                foreach (var task in toRemove._tasks) _taskRepository.RemoveItem(task.Id);
+                //foreach (var task in toRemove._tasks) _taskRepository.RemoveItem(task.Id); Not needed since we do Cascade Delete now.
                 _bugRepository.RemoveItem(id);
-            }
             else
-            {
                 throw new Exception("Bug with id: " + id + " not found.");
-            }
         }
 
         public List<Bug> GetBugList()
