@@ -73,13 +73,17 @@ namespace UnitTestMS
 
             Assert.AreEqual(pm.GetEmployees().Count, 1);
         }
-
         [TestMethod]
         public void TestTaskToEmployeeComposition()
         {
             var c = new Controller();
-            c.AddBug("Nigga");
-            c.AddTask(c.GetBug(1), 10, "Bruh");
+
+            var employee = c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
+            var bug = c.AddBug("Error 404 on index.php page");
+            var task = c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
+            c.AddTaskToEmployee(task, employee);
+
+            Assert.AreEqual(c.GetTask(1).Employee, employee);
         }
     }
 }
