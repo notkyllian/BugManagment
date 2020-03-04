@@ -4,30 +4,31 @@ using System.Linq;
 using Domain.Business.Entities;
 using Domain.Business.Repositories;
 
-namespace Domain
+namespace Domain.Business
 {
     public class Controller
     {
-        private static readonly bool _isLoaded = false;
+        private readonly bool _isLoaded = false;
 
-        private static readonly UserRepository _userRepository = new UserRepository();
-        private static readonly TaskRepository _taskRepository = new TaskRepository();
-        private static readonly BugRepository _bugRepository = new BugRepository();
+        private static readonly UserRepository UserRepository = new UserRepository();
+        private static readonly TaskRepository TaskRepository = new TaskRepository();
+        private static readonly BugRepository BugRepository = new BugRepository();
 
         public Controller()
         {
-            if (!_isLoaded)
-            {
-                _userRepository.Load(Persistence.Controller.GetUsers());
-                _bugRepository.Load(Persistence.Controller.GetBugs());
-                _taskRepository.Load(Persistence.Controller.GetTasks());
+            if (_isLoaded) return;
+
+            UserRepository.Load(Persistence.Controller.GetUsers());
+            BugRepository.Load(Persistence.Controller.GetBugs());
+            TaskRepository.Load(Persistence.Controller.GetTasks());
 
 
-                foreach (var bug in _bugRepository.GetAll())
-                    bug.Load(_taskRepository.GetAll().Where(x => x.Bug.Id == bug.Id).ToList());
-                foreach (var employee in _userRepository.GetAll().OfType<Employee>())
-                    employee.Load(_taskRepository.GetAll().Where(x => x.Employee.Id == employee.Id).ToList());
-            }
+            foreach (var bug in BugRepository.GetAll())
+                bug.Load(TaskRepository.GetAll().Where(x => x.Bug.Id == bug.Id).ToList());
+            foreach (var employee in UserRepository.GetAll().OfType<Employee>())
+                employee.Load(TaskRepository.GetAll().Where(x => x.Employee.Id == employee.Id).ToList());
+
+            _isLoaded = true;
         }
 
 
@@ -35,34 +36,34 @@ namespace Domain
 
         public User AddUser(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new User(_userRepository.GetNextId(), naam, birthday, username, password);
-            _userRepository.AddItem(toAdd);
+            var toAdd = new User(UserRepository.GetNextId(), naam, birthday, username, password);
+            UserRepository.AddItem(toAdd);
             return toAdd;
         }
 
         public Employee AddEmployee(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new Employee(_userRepository.GetNextId(), naam, birthday, password, username);
-            _userRepository.AddItem(toAdd);
+            var toAdd = new Employee(UserRepository.GetNextId(), naam, birthday, password, username);
+            UserRepository.AddItem(toAdd);
             return toAdd;
         }
 
         public Projectmanager AddProjectmanager(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new Projectmanager(_userRepository.GetNextId(), naam, birthday, username, password);
-            _userRepository.AddItem(toAdd);
+            var toAdd = new Projectmanager(UserRepository.GetNextId(), naam, birthday, username, password);
+            UserRepository.AddItem(toAdd);
             return toAdd;
         }
 
         public User UpdateUser(User user)
         {
-            if (_userRepository.GetItem(user.Id) != null) return _userRepository.UpdateItem(user);
+            if (UserRepository.GetItem(user.Id) != null) return UserRepository.UpdateItem(user);
             throw new Exception("User with id: " + user.Id + " not found.");
         }
 
         public User GetUser(int id)
         {
-            var toGet = _userRepository.GetItem(id);
+            var toGet = UserRepository.GetItem(id);
             if (toGet != null)
                 return toGet;
             throw new Exception("User with id: " + id + " not found.");
@@ -70,16 +71,16 @@ namespace Domain
 
         public void RemoveUser(int id)
         {
-            var toRemove = _userRepository.GetItem(id);
+            var toRemove = UserRepository.GetItem(id);
             if (toRemove != null)
-                _userRepository.RemoveItem(id);
+                UserRepository.RemoveItem(id);
             else
                 throw new Exception("User with id: " + id + " not found.");
         }
 
         public List<User> GetUsers()
         {
-            return _userRepository.GetAll();
+            return UserRepository.GetAll();
         }
 
         #endregion
@@ -89,21 +90,21 @@ namespace Domain
         public Task AddTask(Bug bug, int size, string description, TimeSpan? maxWait = null)
         {
             var timeSpent = maxWait ?? TimeSpan.Zero;
-            var toAdd = new Task(_taskRepository.GetNextId(), bug, description, size, timeSpent);
-            bug._tasks.Add(toAdd);
-            _taskRepository.AddItem(toAdd);
+            var toAdd = new Task(TaskRepository.GetNextId(), bug, description, size, timeSpent);
+            bug.Tasks.Add(toAdd);
+            TaskRepository.AddItem(toAdd);
             return toAdd;
         }
 
         public Task UpdateTask(Task task)
         {
-            if (_taskRepository.GetItem(task.Id) != null) return _taskRepository.UpdateItem(task);
+            if (TaskRepository.GetItem(task.Id) != null) return TaskRepository.UpdateItem(task);
             throw new Exception("Task with id: " + task.Id + " not found.");
         }
 
         public Task GetTask(int id)
         {
-            var toGet = _taskRepository.GetItem(id);
+            var toGet = TaskRepository.GetItem(id);
             if (toGet != null)
                 return toGet;
             throw new Exception("Task with id: " + id + " not found.");
@@ -111,11 +112,11 @@ namespace Domain
 
         public void RemoveTask(Bug bug, int id)
         {
-            var toRemove = _taskRepository.GetItem(id);
+            var toRemove = TaskRepository.GetItem(id);
             if (toRemove != null)
             {
-                bug._tasks.Remove(toRemove);
-                _taskRepository.RemoveItem(id);
+                bug.Tasks.Remove(toRemove);
+                TaskRepository.RemoveItem(id);
             }
             else
             {
@@ -125,14 +126,14 @@ namespace Domain
 
         public void AddTaskToUser(int id, Employee user)
         {
-            var Task = GetTask(id);
-            Task.Employee = user;
-            UpdateTask(Task);
+            var task = GetTask(id);
+            task.Employee = user;
+            UpdateTask(task);
         }
 
         public List<Task> GetTaskList()
         {
-            return _taskRepository.GetAll();
+            return TaskRepository.GetAll();
         }
 
         #endregion
@@ -141,20 +142,20 @@ namespace Domain
 
         public Bug AddBug(string description)
         {
-            var toAdd = new Bug(_bugRepository.GetNextId(), description);
-            _bugRepository.AddItem(toAdd);
+            var toAdd = new Bug(BugRepository.GetNextId(), description);
+            BugRepository.AddItem(toAdd);
             return toAdd;
         }
 
         public Bug UpdateBug(Bug bug)
         {
-            if (_bugRepository.GetItem(bug.Id) != null) return _bugRepository.UpdateItem(bug);
+            if (BugRepository.GetItem(bug.Id) != null) return BugRepository.UpdateItem(bug);
             throw new Exception("Bug with id: " + bug.Id + " not found.");
         }
 
         public Bug GetBug(int id)
         {
-            var toGet = _bugRepository.GetItem(id);
+            var toGet = BugRepository.GetItem(id);
             if (toGet != null)
                 return toGet;
             throw new Exception("Bug with id: " + id + " not found.");
@@ -162,17 +163,17 @@ namespace Domain
 
         public void RemoveBug(int id)
         {
-            var toRemove = _bugRepository.GetItem(id);
+            var toRemove = BugRepository.GetItem(id);
             if (toRemove != null)
                 //foreach (var task in toRemove._tasks) _taskRepository.RemoveItem(task.Id); Not needed since we do Cascade Delete now.
-                _bugRepository.RemoveItem(id);
+                BugRepository.RemoveItem(id);
             else
                 throw new Exception("Bug with id: " + id + " not found.");
         }
 
         public List<Bug> GetBugList()
         {
-            return _bugRepository.GetAll();
+            return BugRepository.GetAll();
         }
 
         #endregion
@@ -194,7 +195,7 @@ namespace Domain
 
         public void AddEmployeeToProject(Projectmanager projectmanager, Employee employee)
         {
-            projectmanager.addEmployee(employee);
+            projectmanager.AddEmployee(employee);
             UpdateUser(employee);
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Domain;
+using Domain.Business;
 using Domain.Business.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -51,7 +52,8 @@ namespace UnitTestMS
             var task = c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
             c.AddTaskToEmployee(task, employee);
 
-            Assert.AreEqual(c.GetBug(1).GetTaskCount(), 1);//TODO fix the fact that I can't remove user because connection between user and task
+            Assert.AreEqual(c.GetBug(1).GetTaskCount(),
+                1); //TODO fix the fact that I can't remove user because connection between user and task
 
             c.RemoveUser(employee.Id);
         }
@@ -59,13 +61,17 @@ namespace UnitTestMS
         [TestMethod]
         public void TestUpdateFunctionality()
         {
-            var _c = new Controller();
+            var c = new Controller();
 
-            var user = _c.AddUser("Philip", DateTime.Now, "Philip", "test");
-            user.Name = "Philip2";
-            _c.UpdateUser(user);
+            var emp = c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
+            var pm = c.AddProjectmanager("Jens", DateTime.Now, "Jens", "test");
 
-            Assert.AreEqual(_c.GetUser(user.Id).Name, "Philip2");
+            c.AddEmployeeToProject(pm, emp);
+            emp.Name = "Philip2";
+
+            c.UpdateUser(emp);
+
+            Assert.AreEqual(pm.GetEmployees().Count, 1);
         }
 
         [TestMethod]
@@ -74,11 +80,6 @@ namespace UnitTestMS
             var c = new Controller();
             c.AddBug("Nigga");
             c.AddTask(c.GetBug(1), 10, "Bruh");
-
-
-
         }
-
-        
     }
 }

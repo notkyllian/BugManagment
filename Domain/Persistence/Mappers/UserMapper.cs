@@ -9,7 +9,7 @@ namespace Domain.Persistence.Mappers
 {
     internal class UserMapper
     {
-        private readonly string _connectionString = "";
+        private readonly string _connectionString;
 
         internal UserMapper(string connectionString)
         {
@@ -47,21 +47,11 @@ namespace Domain.Persistence.Mappers
 
         private Projectmanager getProjectmanagerFromEmployee(User employee)
         {
-            var users = new List<Projectmanager>();
-            users = UserRepository.Items.OfType<Projectmanager>().ToList();
-
-
+            var users = UserRepository.Items.OfType<Projectmanager>().ToList();
             Projectmanager returnProjectmanager = null;
-
-            foreach (var user in users)
-                if (user.GetType() == typeof(Projectmanager))
-                {
-                    var pm = user;
-                    if (pm.GetEmployees().Contains((Employee) employee))
-                        returnProjectmanager = pm;
-                }
-
-
+            foreach (var pm in users.Where(user => user.GetType() == typeof(Projectmanager))
+                .Where(pm => pm.GetEmployees().Contains((Employee) employee)))
+                returnProjectmanager = pm;
             return returnProjectmanager;
         }
 
@@ -136,8 +126,7 @@ namespace Domain.Persistence.Mappers
         {
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand(
-                "UPDATE tbluser SET name = @name, birthday = @birthday, rol = @rol, username = @username, password = @password, projectmanager_id = @projectmanager_id" +
-                " WHERE id=@id"
+                "UPDATE tbluser SET name = @name, birthday = @birthday, rol = @rol, username = @username, password = @password WHERE id=@id"
                 , connection);
             command.Parameters.AddWithValue("name", user.Name);
             command.Parameters.AddWithValue("id", user.Id);
@@ -148,6 +137,11 @@ namespace Domain.Persistence.Mappers
 
             if (user.GetType() == typeof(Employee))
             {
+                var index = command.CommandText.IndexOf("WHERE", StringComparison.Ordinal);
+                command.CommandText = command.CommandText.Insert(index - 1, ", projectmanager_id = @projectmanager_id");
+                //We do this because the variable is not always changed 
+
+
                 command.Parameters.AddWithValue("rol", "employee");
                 var pm = getProjectmanagerFromEmployee(user);
                 if (pm != null) command.Parameters.AddWithValue("projectmanager_id", pm.Id);
@@ -171,7 +165,7 @@ namespace Domain.Persistence.Mappers
         internal void DeleteUserInDb(User user)
         {
             var connection = new MySqlConnection(_connectionString);
-            var command = new MySqlCommand();
+            MySqlCommand command;
 
             //clean out
             if (user.GetType() == typeof(Projectmanager))

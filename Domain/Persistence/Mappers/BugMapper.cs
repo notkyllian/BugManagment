@@ -11,7 +11,7 @@ namespace Persistence
         //For the rest all independent
 
 
-        private readonly string _connectionString = "";
+        private readonly string _connectionString;
 
         internal BugMapper(string connectionString)
         {
@@ -20,7 +20,7 @@ namespace Persistence
 
         internal List<Bug> GetBugsFromDb()
         {
-            var _bugs = new List<Bug>();
+            var bugs = new List<Bug>();
 
             var connection = new MySqlConnection(_connectionString);
             var command = new MySqlCommand("SELECT * from tblbug", connection);
@@ -33,11 +33,11 @@ namespace Persistence
                     Convert.ToInt32(dataReader["id"]),
                     Convert.ToString(dataReader["description"])
                 );
-                _bugs.Add(_bug);
+                bugs.Add(_bug);
             }
 
             connection.Close();
-            return _bugs;
+            return bugs;
         }
 
         internal void AddBugToDb(Bug bug)

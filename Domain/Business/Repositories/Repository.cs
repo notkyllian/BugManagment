@@ -34,8 +34,17 @@ namespace Domain.Business.Repositories
         /// <param name="id">The id of the entity you're trying to find</param>
         internal abstract void RemoveItem(int id);
 
+        /// <summary>
+        /// Loads list of T to the Items paramater
+        /// </summary>
+        /// <param name="list">The gathered list of T </param>
         internal abstract void Load(List<T> list);
 
+        /// <summary>
+        /// Update T
+        /// </summary>
+        /// <param name="entity">The T you want to update</param>
+        /// <returns>After updating it returns the new T that's directly gathered from the repository</returns>
         internal abstract T UpdateItem(T entity);
 
         /// <summary>

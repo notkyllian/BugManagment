@@ -14,7 +14,7 @@ namespace Domain.Business.Entities
             _employees = new List<Employee>();
         }
 
-        internal void addEmployee(Employee employee)
+        internal void AddEmployee(Employee employee)
         {
             _employees.Add(employee);
         }
@@ -24,7 +24,7 @@ namespace Domain.Business.Entities
             foreach (var employee in employees) _employees.Add(employee);
         }
 
-        internal List<Employee> GetEmployees()
+        public List<Employee> GetEmployees()
         {
             return _employees;
         }

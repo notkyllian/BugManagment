@@ -4,11 +4,11 @@ namespace Domain.Business.Entities
 {
     public class Bug : Entity
     {
-        public List<Task> _tasks;
+        public List<Task> Tasks;
 
         public Bug(int id, string description) : base(id)
         {
-            _tasks = new List<Task>();
+            Tasks = new List<Task>();
             Description = description;
         }
 
@@ -17,12 +17,12 @@ namespace Domain.Business.Entities
 
         public int GetTaskCount()
         {
-            return _tasks.Count;
+            return Tasks.Count;
         }
 
         internal void Load(List<Task> taken)
         {
-            _tasks = taken;
+            Tasks = taken;
         }
     }
 }
