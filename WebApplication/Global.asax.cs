@@ -11,6 +11,7 @@ namespace WebApplication
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            //test
         }
 
         protected void Session_Start(object sender, EventArgs e)
