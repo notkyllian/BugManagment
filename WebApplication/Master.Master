@@ -25,33 +25,55 @@
         </asp:ScriptManager>
         <section>
             <header>
-                <div id="heading">
-                    <h1>Startvoorbeeld</h1>
-                    <div>
-                        <asp:LoginView runat="server">
-                            <AnonymousTemplate>
-                                <asp:HyperLink ID="HyperLink1" href="/Account/Register.aspx" runat="server">Register</asp:HyperLink>
-                            </AnonymousTemplate>
-                            <LoggedInTemplate>
-                                Welcome, <asp:LoginName ID="LoginName1" runat="server"/>
-                            </LoggedInTemplate>
-                        </asp:LoginView>
-                        <asp:LoginStatus ID="LoginStatus1" runat="server" OnLoggingOut="LoginStatus1_OnLoggingOut" />
-                    </div>
-                </div>
-                <nav>
-                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal">
-                        <Items>
-                            <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home" Value="Home"></asp:MenuItem>
-                        </Items>
-                    </asp:Menu>
-                </nav>
-                
+
+                <asp:LoginView runat="server">
+                    <AnonymousTemplate>
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" runat="server" href="~/Account/Registreren.aspx">Registreren</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" runat="server" href="~/Account/Login.aspx">Aanmelden</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">
+                            <a class="navbar-brand" href="#">Navbar</a>
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maak je keuze</a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" runat="server" href="~/Users/Resultaat.aspx">Overzicht</a>
+                                        <a class="dropdown-item" href="~/Users/Nieuw.aspx">Nieuwe bijdrage</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">Left Link 2</a>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" runat="server" href="#">Welkom,
+                               
+                                        <asp:LoginName ID="LoginName1" runat="server" />
+                                    </a>
+                                </li>
+                                <li class="nav-item active">
+                                    <asp:LoginStatus class="nav-link" ID="LoginStatus1" runat="server" OnLoggingOut="LoginStatus1_OnLoggingOut" />
+                                </li>
+                            </ul>
+                        </nav>
+                    </LoggedInTemplate>
+                </asp:LoginView>
+
             </header>
         </section>
-        
-        
-        
+
+
+
         <main>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
