@@ -13,5 +13,10 @@ namespace WebApplication
         {
             
         }
+
+        protected void LoginStatus1_OnLoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

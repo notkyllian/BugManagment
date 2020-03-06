@@ -23,6 +23,35 @@
                 <asp:ScriptReference Name="bootstrap" />
             </Scripts>
         </asp:ScriptManager>
+        <section>
+            <header>
+                <div id="heading">
+                    <h1>Startvoorbeeld</h1>
+                    <div>
+                        <asp:LoginView runat="server">
+                            <AnonymousTemplate>
+                                <asp:HyperLink ID="HyperLink1" href="/Account/Register.aspx" runat="server">Register</asp:HyperLink>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                Welcome, <asp:LoginName ID="LoginName1" runat="server"/>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                        <asp:LoginStatus ID="LoginStatus1" runat="server" OnLoggingOut="LoginStatus1_OnLoggingOut" />
+                    </div>
+                </div>
+                <nav>
+                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal">
+                        <Items>
+                            <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home" Value="Home"></asp:MenuItem>
+                        </Items>
+                    </asp:Menu>
+                </nav>
+                
+            </header>
+        </section>
+        
+        
+        
         <main>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
