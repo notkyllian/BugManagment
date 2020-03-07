@@ -17,28 +17,9 @@ namespace WebApplication.Account
 
         }
 
-        protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
+        protected void Login_Click(object sender, EventArgs e)
         {
-            MySqlConnection mySqlConnection = new MySqlConnection(ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
-            MySqlCommand mySqlCommand = new MySqlCommand("SELECT role FROM tbluser WHERE (username = @login AND password = @password)", mySqlConnection);
-            mySqlCommand.Parameters.AddWithValue("login", Login1.UserName);
-            mySqlCommand.Parameters.AddWithValue("password", Login1.Password);
 
-            mySqlConnection.Open();
-
-            string strRole;
-            if (mySqlCommand.ExecuteScalar() == null) strRole = String.Empty;
-            else strRole = mySqlCommand.ExecuteScalar().ToString();
-
-            mySqlConnection.Close();
-
-            if (strRole == "employee" || strRole == "projectmanager")
-            {
-                Session["role"] = strRole;
-                FormsAuthentication.RedirectFromLoginPage(Login1.UserName, false);
-            }
-            else Login1.FailureText = "Wrong login, try again!";
-            
         }
     }
 }

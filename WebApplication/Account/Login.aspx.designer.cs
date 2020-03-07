@@ -15,12 +15,30 @@ namespace WebApplication.Account
     {
 
         /// <summary>
-        /// Login1 control.
+        /// inputUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login1;
+        protected global::System.Web.UI.WebControls.TextBox inputUser;
+
+        /// <summary>
+        /// inputPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox inputPassword;
+
+        /// <summary>
+        /// LoginButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LoginButton;
     }
 }
