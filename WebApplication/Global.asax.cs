@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.UI;
+using Domain.Business;
 
 namespace WebApplication
 {
@@ -37,6 +38,8 @@ namespace WebApplication
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            Controller c = new Controller();
+            Session["controller"] = c;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

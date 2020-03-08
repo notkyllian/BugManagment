@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Business.Entities;
 using Domain.Business.Repositories;
-using Microsoft.AspNet.Identity;
 
 namespace Domain.Business
 {

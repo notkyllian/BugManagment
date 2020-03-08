@@ -22,9 +22,7 @@ namespace Domain.Persistence
                             .ConnectionStrings.ConnectionStrings.Count ==
                         0) throw new Exception("Connection string not configured");
 
-                    _connectionString = ConfigurationManager
-                        .OpenExeConfiguration(Assembly.GetExecutingAssembly().Location).ConnectionStrings
-                        .ConnectionStrings["Database"].ConnectionString;
+                    _connectionString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
                 }
 
                 return _connectionString;

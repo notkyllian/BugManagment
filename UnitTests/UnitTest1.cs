@@ -78,10 +78,7 @@ namespace UnitTestMS
         {
             var c = new Controller();
 
-            var employee = c.AddEmployee("Dirk", DateTime.Now, "Dirk", "test");
-            var bug = c.AddBug("Error 404 on index.php page");
-            var task = c.AddTask(bug, 10, "Make page redirect to temp directory", TimeSpan.FromDays(1));
-            c.AddTaskToEmployee(task, employee);
+            var employee = c.AddEmployee("Dirk", DateTime.Now, "dirkusername", "test");
 
             Assert.AreEqual(c.GetTask(1).Employee, employee);
         }

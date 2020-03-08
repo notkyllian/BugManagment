@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Domain.Business;
 
 namespace WebApplication
 {
@@ -15,7 +16,8 @@ namespace WebApplication
         public bool test = false;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Controller c = (Controller)Session["controller"];
+            Label1.Text = c.GetUser(1).Name;
         }
     }
 }

@@ -11,7 +11,7 @@
                         <h5 class="card-title text-center">Sign In</h5>
                         <form class="form-signin">
                             <div class="form-label-group">
-                               <asp:TextBox CssClass="form-control" ID="inputUser" runat="server" placeholder="usernaùe" required="true" type="text" autofocus="true"></asp:TextBox>
+                                <asp:TextBox CssClass="form-control" ID="inputUser" runat="server" placeholder="usernaùe" required="true" type="text" autofocus="true"></asp:TextBox>
                                 <label for="ContentPlaceHolder1_inputUser">Username</label>
                             </div>
 
@@ -26,7 +26,7 @@
                             </div>
 
                             <asp:Button ID="LoginButton" runat="server" class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" Text="Sign in" OnClick="Login_Click"/>
-                             </form>
+                        </form>
                     </div>
                 </div>
             </div>

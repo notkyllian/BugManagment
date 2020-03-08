@@ -1,3 +1,0 @@
-Login Header normal
-Based on role redirect to folder
-Folder has default and checks if role is correct otherwise redirect to correct role page
