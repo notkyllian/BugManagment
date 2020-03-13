@@ -13,11 +13,11 @@ namespace WebApplication.user
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["uid"] == null) Response.Redirect("~/Default.aspx");
-            var c = (Controller) Session["controller"];
             
-            Label1.Text = c.GetUser(Convert.ToInt32(Session["uid"])).Name;
-
+            var c = (Controller) Session["controller"];
+            if (Session["uid"] == null) Response.Redirect("~/Default.aspx");
+            else if (c.GetUser(Convert.ToInt32(Session["uid"])).GetType().Name.ToLower() != "user") Response.Redirect("~/Default.aspx"); // Check if role is user if not redirect to default page which will redirect to correct role page
+     
 
         }
     }

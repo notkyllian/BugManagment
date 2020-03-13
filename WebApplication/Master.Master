@@ -4,53 +4,37 @@
 
 <html>
 <head runat="server">
-    <title></title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/Content/bootstrap.css" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
 
-
-    <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-            <Scripts>
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="popper" />
-                <asp:ScriptReference Name="bootstrap" />
-            </Scripts>
-        </asp:ScriptManager>
-        <section>
-            <header>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" runat="server" href="~/Account/Registreren.aspx">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" runat="server" href="~/Account/Login.aspx">Sign in</a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
-        </section>
-
-
-
-        <main>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-        </main>
-    </form>
-    <!-- Page Content  -->
+<form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="popper" />
+            <asp:ScriptReference Name="bootstrap" />
+        </Scripts>
+    </asp:ScriptManager>
+    <div id="wrapper">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+</form>
 
 
 
 
 
-    <script src="/js/main.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="/assets/js/theme.js"></script>
 </body>
 </html>
