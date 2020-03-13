@@ -33,6 +33,15 @@ namespace Domain.Business
             _isLoaded = true;
         }
 
+        #region Presentation Layer
+
+        public User Login(string username, string password)
+        {
+            var user = GetUsers().Find(x => x.Username == username && x.Password == password);
+            return user;
+        }
+
+        #endregion
 
         #region User
 

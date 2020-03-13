@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Domain.Business;
 
 namespace WebApplication
 {
@@ -11,12 +12,12 @@ namespace WebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Session["uid"] == null) return;
+            var c = (Controller) Session["controller"];
+            var user = c.GetUser(Convert.ToInt32(Session["uid"]));
+            Response.Redirect($"/{user.GetType().Name.ToLower()}/Default.aspx");
         }
 
-        protected void LoginStatus1_OnLoggingOut(object sender, LoginCancelEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
