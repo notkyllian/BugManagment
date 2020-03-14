@@ -2,44 +2,73 @@
 
 <!DOCTYPE html>
 
-
 <html>
 <head runat="server">
-    <title></title>
+    <title>Management</title>
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/Content/bootstrap.css" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
 
-
-    <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-            <Scripts>
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="popper" />
-                <asp:ScriptReference Name="bootstrap" />
-            </Scripts>
-        </asp:ScriptManager>
-        <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" runat="server" href="~/Account/Logout.aspx">Sign out</a>
+<form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Name="jquery"/>
+            <asp:ScriptReference Name="popper"/>
+            <asp:ScriptReference Name="bootstrap"/>
+        </Scripts>
+    </asp:ScriptManager>
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0">
+                <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15">
+                        <i class="fas fa-laugh-wink"></i>
+                    </div>
+                    <div class="sidebar-brand-text mx-3">Management</div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="nav navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+                        </a>
                     </li>
                 </ul>
-            </nav>
-        </header>
+                <div class="text-center d-none d-md-inline">
+                    <button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="btn btn-sm align-middle btn-primary" href="/Account/Logout.aspx">Logout</a>
+                        </li>
+                       
+
+                    </ul>
+                </nav>
+
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+
+    </div>
+</form>
 
 
-
-        <main>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-        </main>
-    </form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="/assets/js/theme.js"></script>
 </body>
 </html>

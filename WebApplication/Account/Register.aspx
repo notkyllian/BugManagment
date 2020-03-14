@@ -1,14 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebApplication.Account.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="WebApplication.Account.Register" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Content/bootstrap.min.css" />
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
-    <title>Login | Management</title>
+    <title>Register | Management</title>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -42,12 +43,13 @@
                                     <label for="inputPassword">Password</label>
                                 </div>
 
-                                <div class="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">Remember password</label>
-                                </div>
+                                <asp:DropDownList ID="Role" runat="server" CssClass="form-control">
+                                    <asp:ListItem>User</asp:ListItem>
+                                    <asp:ListItem>Employee</asp:ListItem>
+                                    <asp:ListItem>Projectmanager</asp:ListItem>
+                                </asp:DropDownList>
 
-                                <asp:Button ID="LoginButton" runat="server" class="btn btn-lg btn-primary btn-block text-uppercase" Text="Sign in" OnClick="Login_Click"/>
+                                <asp:Button ID="RegisterButton" runat="server" class="btn btn-lg btn-primary btn-block text-uppercase" Text="Register" OnClick="RegisterButton_OnClick"/>
                             </div>
                         </div>
                     </div>
@@ -60,6 +62,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-    <script src="/assets/js/theme.js"></script>
 </body>
 </html>

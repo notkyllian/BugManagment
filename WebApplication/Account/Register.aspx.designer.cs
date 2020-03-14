@@ -7,45 +7,56 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication.Account {
-    
-    
-    public partial class Login {
-        
+namespace WebApplication.Account
+{
+
+
+    public partial class Register
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// inputUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox inputUser;
-        
+
         /// <summary>
         /// inputPassword control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox inputPassword;
-        
+
         /// <summary>
-        /// LoginButton control.
+        /// Role control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button LoginButton;
+        protected global::System.Web.UI.WebControls.DropDownList Role;
+
+        /// <summary>
+        /// RegisterButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button RegisterButton;
     }
 }

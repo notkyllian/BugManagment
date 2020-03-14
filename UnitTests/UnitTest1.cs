@@ -78,9 +78,9 @@ namespace UnitTestMS
         {
             var c = new Controller();
 
-            var employee = c.AddEmployee("Dirk", DateTime.Now, "dirkusername", "test");
+            var bug = c.GetBug(1);
+            var task = c.AddTask(bug, 10, "Redirect mainframe errors", TimeSpan.FromDays(2));
 
-            Assert.AreEqual(c.GetTask(1).Employee, employee);
         }
     }
 }

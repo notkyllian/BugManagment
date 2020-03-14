@@ -7,14 +7,16 @@ using System.Web.UI.WebControls;
 
 namespace WebApplication.Account
 {
-    public partial class Logout : System.Web.UI.Page
+    public partial class Register : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            Session.Remove("uid");
-            Session.Remove("error");
-            Response.Redirect("~/Default.aspx");
+
+        }
+
+        protected void RegisterButton_OnClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

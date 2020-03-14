@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Domain.Business;
-using Domain.Business.Entities;
 
 namespace WebApplication.Account
 {
     public partial class Login : System.Web.UI.Page
     {
         private Controller _c;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack)
-            {
-                _c = (Controller)Session["controller"];
-            }
+            _c = (Controller) Session["controller"];
         }
 
         protected void Login_Click(object sender, EventArgs e)
@@ -41,8 +36,6 @@ namespace WebApplication.Account
             {
                 Session["error"] = "Invalid request!";
             }
-
-            
         }
     }
 }
