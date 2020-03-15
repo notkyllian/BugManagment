@@ -11,7 +11,7 @@ namespace Domain.Business.Entities
         public string Username;
 
 
-        public User(int id, string name, DateTime birthday, string password, string username) : base(id)
+        public User(int id, string name, DateTime birthday,string username,string password) : base(id)
         {
             Name = name;
             Birthday = birthday;

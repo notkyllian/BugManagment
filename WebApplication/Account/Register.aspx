@@ -9,6 +9,7 @@
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css"/>
     <title>Register | Management</title>
 </head>
 <body>
@@ -31,8 +32,30 @@
                             <%
                                 }
                             %>
-                            <h5 class="card-title text-center">Sign In</h5>
+                    <div style="display: flex;">
+                        <a class="btn btn-primary" style="height: 40px;" href="/">Back</a>
+                        <h5 style="margin-left: 23%;" class="card-title text-center">Register</h5>
+
+                    </div>
+                                
+                           
                             <div class="form-signin">
+                                <div class="form-label-group">
+                                    <asp:TextBox CssClass="form-control" ID="inputName" runat="server" placeholder="name" required="true" type="text" autofocus="true"></asp:TextBox>
+                                    <label for="inputName">Name</label>
+                                </div>
+                                <asp:HiddenField runat="server" ID="hdnDate" Value="01/01/2001"/>
+
+                                <!--  possible solution -> <asp:Calendar ID="Calendar1" runat="server"></asp:Calendar>-->
+                               <div class="border rounded" style="margin-bottom: 20px; border-radius: 2rem!important;">
+                                   <p class="text-center">Birthday</p>
+                                   <div class="form-label-group">
+                                    
+                                       <div style="margin-left: 23%; width: 52%; border-radius: 1rem!important;" id="txtDate" class="border rounded"></div>
+                                   </div>
+                               </div>
+                              
+
                                 <div class="form-label-group">
                                     <asp:TextBox CssClass="form-control" ID="inputUser" runat="server" placeholder="username" required="true" type="text" autofocus="true"></asp:TextBox>
                                     <label for="inputUser">Username</label>
@@ -62,5 +85,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+
+        $('[id*=txtDate]').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                format: "dd/mm/yyyy",
+                defaultDate: '01/01/01'
+
+            })
+            .change(dateChanged)
+            .on('changeDate', dateChanged);
+
+        function dateChanged(e) {
+            
+            $('[id*=txtDate]').val(e.format(0,"dd/mm/yyyy"));
+
+            $("#<%= hdnDate.ClientID %>").val(e.format(0, "dd/mm/yyyy"));
+
+        }
+
+    });
+</script>
 </body>
 </html>

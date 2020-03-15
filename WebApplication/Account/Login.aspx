@@ -30,7 +30,11 @@
                             <%
                                 }
                             %>
-                            <h5 class="card-title text-center">Sign In</h5>
+                            <div style="display: flex;">
+                                <a class="btn btn-primary" style="height: 40px;" href="/">Back</a>
+                                <h5 style="margin-left: 22%;" class="card-title text-center">Sign in</h5>
+
+                            </div>
                             <div class="form-signin">
                                 <div class="form-label-group">
                                     <asp:TextBox CssClass="form-control" ID="inputUser" runat="server" placeholder="username" required="true" type="text" autofocus="true"></asp:TextBox>

@@ -54,7 +54,7 @@ namespace Domain.Business
 
         public Employee AddEmployee(string naam, DateTime birthday, string username, string password)
         {
-            var toAdd = new Employee(UserRepository.GetNextId(), naam, birthday, password, username);
+            var toAdd = new Employee(UserRepository.GetNextId(), naam, birthday, username, password);
             UserRepository.AddItem(toAdd);
             return toAdd;
         }
