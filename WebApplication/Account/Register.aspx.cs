@@ -39,14 +39,16 @@ namespace WebApplication.Account
                         Session["error"] = "Invalid user type!";
                         break;
                 }
-                Session["error"] = "Account created, Login!";
+                message.Text = "Account created, Login!";
+                error.Visible = true;
                 success = true;
 
             }
             catch (Exception exception)
             {
-                if (exception.Message.Contains("Duplicate")) Session["error"] = "Username already in use!";
-                else Session["error"] = "Invalid register request!";
+                if (exception.Message.Contains("Duplicate")) message.Text = "Username already in use!";
+                else message.Text = "Invalid register request!";
+                error.Visible = true;
                 success = false;
             }
             if(success) Response.Redirect("Login.aspx");

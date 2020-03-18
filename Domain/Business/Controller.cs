@@ -28,7 +28,7 @@ namespace Domain.Business
             foreach (var bug in BugRepository.GetAll())
                 bug.Load(TaskRepository.GetAll().Where(x => x.Bug.Id == bug.Id).ToList());
             foreach (var employee in UserRepository.GetAll().OfType<Employee>())
-                employee.Load(TaskRepository.GetAll().Where(x => x.Employee.Id == employee.Id).ToList());
+                employee.Load(TaskRepository.GetAll().Where(x => x.Employee != null && x.Employee.Id == employee.Id).ToList());
 
             _isLoaded = true;
         }

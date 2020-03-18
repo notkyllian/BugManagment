@@ -29,12 +29,14 @@ namespace WebApplication.Account
                 }
                 else
                 {
-                    Session["error"] = "Login invalid!";
+                    message.Text = "Login invalid!";
+                    error.Visible = true;
                 }
             }
             catch (Exception)
             {
-                Session["error"] = "Invalid request!";
+                message.Text = "Invalid request!";
+                error.Visible = true;
             }
         }
     }

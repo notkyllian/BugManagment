@@ -17,19 +17,12 @@
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="card card-signin my-5">
                         <div class="card-body">
-                            <%
-                                if (Session["error"] != null)
-                                {
-                            %>
 
-                            <div class="alert alert-warning alert-dismissible">
+                            <div class="alert alert-warning alert-dismissible" id="error" runat="server" visible="false" enableviewstate="true">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                <strong>Warning!</strong> <%=Session["error"]%>
+                                <strong>Warning! <asp:Literal ID="message" runat="server"></asp:Literal></strong> 
                             </div>
 
-                            <%
-                                }
-                            %>
                             <div style="display: flex;">
                                 <a class="btn btn-primary" style="height: 40px;" href="/">Back</a>
                                 <h5 style="margin-left: 22%;" class="card-title text-center">Sign in</h5>

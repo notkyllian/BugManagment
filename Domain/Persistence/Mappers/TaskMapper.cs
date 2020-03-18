@@ -10,7 +10,7 @@ namespace Persistence
     {
         private readonly string _connectionString;
 
-        internal TaskMapper(string connectionString)
+        internal TaskMapper(string connectionString)    
         {
             _connectionString = connectionString;
         }
@@ -36,8 +36,10 @@ namespace Persistence
                     timeSpan
                 );
                 if (!dataReader.IsDBNull(dataReader.GetOrdinal("user_id")))
-                    task.Employee =
-                        (Employee) UserRepository.Items.Find(x => x.Id == Convert.ToInt32(dataReader["user_id"]));
+                {
+                    var user = UserRepository.Items.Find(x => x.Id == Convert.ToInt32(dataReader["user_id"]));
+                    if (user.GetType() == typeof(Employee)) task.Employee = (Employee) user;
+                }
                 tasks.Add(task);
             }
 
