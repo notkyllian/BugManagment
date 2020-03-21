@@ -15,7 +15,7 @@ namespace WebApplication.user
         {
 
             _c = (Controller) Session["controller"];
-            ltrlName.Text = _c.GetUser(Convert.ToInt32(Session["uid"])).Name;
+            
 
         }
     }
