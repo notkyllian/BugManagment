@@ -7,11 +7,39 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication.user
-{
-
-
-    public partial class Default
-    {
+namespace WebApplication.user {
+    
+    
+    public partial class Default {
+        
+        /// <summary>
+        /// bugDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea bugDescription;
+        
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new WebApplication.user.UserMaster Master {
+            get {
+                return ((WebApplication.user.UserMaster)(base.Master));
+            }
+        }
     }
 }

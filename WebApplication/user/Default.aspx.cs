@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Domain.Business;
+using Domain.Business.Entities;
 
 namespace WebApplication.user
 {
@@ -17,6 +18,13 @@ namespace WebApplication.user
             _c = (Controller) Session["controller"];
             
 
+        }
+
+        protected void Submit(object sender, EventArgs e)
+        {
+            var b  = _c.AddBug(bugDescription.Value);
+            lblMessage.Text = $@"Bug Reported! Id: {b.Id}";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Modal", "Notify();", true);
         }
     }
 }
