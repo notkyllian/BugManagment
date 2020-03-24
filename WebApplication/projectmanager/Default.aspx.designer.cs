@@ -7,39 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication.projectmanager {
-    
-    
-    public partial class Default {
-        
+namespace WebApplication.projectmanager
+{
+
+
+    public partial class Default
+    {
+
         /// <summary>
         /// ltrlTask control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrlTask;
-        
+
         /// <summary>
         /// ltrlBug control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
-        /// To modify, move the field declaration from the designer file to a code-behind file.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrlBug;
-        
-        /// <summary>
-        /// Master property.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated property.
-        /// </remarks>
-        public new WebApplication.projectmanager.ProjectManagerMaster Master {
-            get {
-                return ((WebApplication.projectmanager.ProjectManagerMaster)(base.Master));
-            }
-        }
     }
 }

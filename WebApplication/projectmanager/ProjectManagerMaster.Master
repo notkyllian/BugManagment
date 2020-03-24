@@ -7,6 +7,7 @@
     <title>Management</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -34,8 +35,18 @@
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="index.html">
+                        <a class="nav-link active" href="Default.aspx">
                             <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="Bugs.aspx">
+                            <i class="fas fa-bug"></i><span>Bugs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" href="Bugs.aspx">
+                            <i class="fas fa-tasks"></i><span>Tasks</span>
                         </a>
                     </li>
                 </ul>
