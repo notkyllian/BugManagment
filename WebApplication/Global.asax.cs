@@ -38,6 +38,7 @@ namespace WebApplication
 
         protected void Session_Start(object sender, EventArgs e)
         {
+            
             Controller c = new Controller();
             Session["controller"] = c;
         }
