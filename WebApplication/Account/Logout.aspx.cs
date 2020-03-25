@@ -14,6 +14,8 @@ namespace WebApplication.Account
             
             Session.Remove("uid");
             Session.Remove("error");
+            Session.Remove("bug");
+            Session.Remove("employee");
             Response.Redirect("~/Default.aspx");
         }
     }

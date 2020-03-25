@@ -12,11 +12,11 @@ namespace Domain.Business.Entities
             Description = description;
         }
 
-        public Employee Employee { get; internal set; }
+        public Employee Employee { get; set; }
         public Bug Bug { get; internal set; }
-        public string Description { get; internal set; }
-        public int Size { get; internal set; }
-        public TimeSpan TimeSpent { get; internal set; }
+        public string Description { get; set; }
+        public int Size { get; set; }
+        public TimeSpan TimeSpent { get; set; }
 
         internal void AddTime(TimeSpan time)
         {

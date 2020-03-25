@@ -40,17 +40,14 @@
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="Bugs.aspx">
-                            <i class="fas fa-bug"></i><span>Bugs</span>
-                        </a>
+                        <asp:LinkButton runat="server" CssClass="nav-link active" OnClick="OnClick3"><i class="fas fa-bug"></i><span>Bugs</span></asp:LinkButton>
                     </li>
                     <li class="nav-item" role="presentation">
                         <asp:LinkButton runat="server" CssClass="nav-link active" OnClick="OnClick"><i class="fas fa-tasks"></i><span>Tasks</span></asp:LinkButton>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" href="Bugs.aspx">
-                            <i class="fas fa-users"></i><span>Employees</span>
-                        </a>
+                        <asp:LinkButton runat="server" CssClass="nav-link active" OnClick="OnClick2"><i class="fas fa-users"></i><span>Employees</span></asp:LinkButton>
+
                     </li>
                 </ul>
                 <div class="text-center d-none d-md-inline">

@@ -78,7 +78,9 @@ namespace Persistence
             command.Parameters.AddWithValue("description", task.Description);
             command.Parameters.AddWithValue("timespent", task.TimeSpent);
             command.Parameters.AddWithValue("size", task.Size);
-            command.Parameters.AddWithValue("user_id", task.Employee.Id);
+            if(task.Employee == null) command.Parameters.AddWithValue("user_id", DBNull.Value);
+            else command.Parameters.AddWithValue("user_id", task.Employee.Id);
+
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();

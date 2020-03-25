@@ -27,7 +27,6 @@
                     <asp:LinkButton ID="btnAddTask" CssClass="btn btn-outline-primary" runat="server" Text="<i class='fas fa-plus'> </i>Add" OnClick="btnAddTask_OnClick"></asp:LinkButton>
                 </div>
             </div>
-       
 
         <div class="table table-borderless table-hover table-responsive table-striped">
             <asp:GridView ID="grvTasks" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" BorderWidth="0px" CssClass="col-sm-12" Style="margin: auto;" EnableViewState="False" OnRowEditing="grvTasks_OnRowEditing" OnRowUpdating="grvTasks_OnRowUpdating" OnRowCancelingEdit="grvTasks_OnRowCancelingEdit" OnRowDeleting="grvTasks_OnRowDeleting">
@@ -44,24 +43,39 @@
                             <asp:Label ID="Label1" runat="server" Text='<%# Bind("Employee.Name") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <asp:DropDownList ID="ddlEmployees" CssClass="custom-select" runat="server" DataSourceID="odsEmployees" DataTextField="Name" DataValueField="Id" >
+                            <asp:DropDownList ID="ddlEmployees" CssClass="custom-select" runat="server" DataSourceID="odsEmployees" DataTextField="Name" DataValueField="Id"  SelectedValue='<%# Bind("Employee.Id") %>'>
                             </asp:DropDownList>
                             <asp:ObjectDataSource ID="odsEmployees" runat="server" SelectMethod="GetEmployees" TypeName="Domain.Business.Controller"></asp:ObjectDataSource>
                         </EditItemTemplate>
                     </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="Description">
-                        <ItemStyle Width="80%" />
+                        <ItemStyle Width="60%" />
                         <HeaderStyle BackColor="#3498DB" ForeColor="White" />
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("Description") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                            <input type="text" class="form-control" placeholder="Description" aria-label="Description" id="txtDescription" value="<%# Eval("Description") %>"/>
+
+                            <asp:TextBox runat="server" CssClass="form-control" Text='<%# Eval("Description") %>' ID="txtDescription"></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                   
-                    
+
+                    <asp:TemplateField HeaderText="Size">
+                        <ItemStyle Width="10%" />
+                        <HeaderStyle BackColor="#3498DB" ForeColor="White" />
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+
+                            <asp:TextBox runat="server" CssClass="form-control" Text='<%# Eval("Size") %>' ID="txtSize"></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="TimeSpent" HeaderText="TimeSpent" DataFormatString="{0:t}">
+                        <HeaderStyle BackColor="#3498DB" ForeColor="White" />
+                        <ItemStyle Width="20%" />
+                    </asp:BoundField>
                     <asp:TemplateField>
                         <HeaderStyle BackColor="#3498DB" ForeColor="White" HorizontalAlign="Center"/>
                         <ItemTemplate>
@@ -89,7 +103,7 @@
         </div>
         <asp:Panel ID="backPanel" runat="server">
             <div style="width: 200px;" class="mx-auto">
-                <asp:Button Style="width: 200px;" CssClass="btn btn-secondary mx-auto" ID="btnBack" runat="server" Text="Back" />
+                <asp:Button Style="width: 200px;" CssClass="btn btn-secondary mx-auto" ID="btnBack" runat="server" Text="Back" OnClick="btnBack_OnClick" />
             </div>
         </asp:Panel>
 

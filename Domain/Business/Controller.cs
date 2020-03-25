@@ -96,7 +96,10 @@ namespace Domain.Business
 
         public List<Employee> GetEmployees()
         {
-            return UserRepository.GetAll().OfType<Employee>().ToList();
+            List<Employee> lE = new List<Employee>();
+            lE.Add(new Employee(0, "None", DateTime.MinValue, " ", " "));
+            lE.AddRange(UserRepository.GetAll().OfType<Employee>().ToList());
+            return lE;
         }
 
         #endregion

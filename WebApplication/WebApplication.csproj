@@ -86,6 +86,7 @@
     <None Include="packages.config" />
     <Content Include="projectmanager\Bugs.aspx" />
     <Content Include="projectmanager\Default.aspx" />
+    <Content Include="projectmanager\Employees.aspx" />
     <Content Include="projectmanager\ProjectManagerMaster.Master" />
     <None Include="Properties\PublishProfiles\kyllian - Web Deploy.pubxml" />
     <Content Include="projectmanager\Tasks.aspx" />
@@ -144,6 +145,13 @@
     </Compile>
     <Compile Include="projectmanager\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="projectmanager\Employees.aspx.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="projectmanager\Employees.aspx.designer.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
     </Compile>
     <Compile Include="projectmanager\ProjectManagerMaster.Master.cs">
       <DependentUpon>ProjectManagerMaster.Master</DependentUpon>

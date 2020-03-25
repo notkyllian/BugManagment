@@ -7,7 +7,7 @@ namespace Domain.Business.Entities
     {
         private readonly List<Task> _todo;
 
-        internal Employee(int id, string name, DateTime birthday, string username, string password) : base(id, name,
+        public Employee(int id, string name, DateTime birthday, string username, string password) : base(id, name,
             birthday, username, password)
         {
             _todo = new List<Task>();

@@ -20,9 +20,24 @@ namespace WebApplication.projectmanager
 
         protected void OnClick(object sender, EventArgs e)
         {
-            if(Session["bug"] != null) Session["bug"] = null;
+            Session.Remove("bug");
+            Session.Remove("employee");
 
             Response.Redirect("Tasks.aspx");
+        }
+
+        protected void OnClick2(object sender, EventArgs e)
+        {
+            Session.Remove("bug");
+            Session.Remove("employee");
+            Response.Redirect("Employees.aspx");
+        }
+
+        protected void OnClick3(object sender, EventArgs e)
+        {
+            Session.Remove("bug");
+            Session.Remove("employee");
+            Response.Redirect("Bugs.aspx");
         }
     }
 }
