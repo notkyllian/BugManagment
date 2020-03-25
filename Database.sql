@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `refactor_gip` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE  IF NOT EXISTS `refactor_gip` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `refactor_gip`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: refactor.noahmagee.com    Database: refactor_gip
+-- Host: localhost    Database: refactor_gip
 -- ------------------------------------------------------
--- Server version	5.7.29-cll-lve
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,7 +28,7 @@ CREATE TABLE `tblbug` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `tblbug` (
 
 LOCK TABLES `tblbug` WRITE;
 /*!40000 ALTER TABLE `tblbug` DISABLE KEYS */;
-INSERT INTO `tblbug` VALUES (2,'test');
+INSERT INTO `tblbug` VALUES (1,'test123'),(2,'Test'),(3,'neuken\r\npenis\r\nneger\r\nfuck\r\nvagina\r\n'),(4,'Nigga');
 /*!40000 ALTER TABLE `tblbug` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `tbltask` (
   KEY `fk_task_user1_idx` (`user_id`),
   CONSTRAINT `fk_task_bug1` FOREIGN KEY (`bug_id`) REFERENCES `tblbug` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_task_user1` FOREIGN KEY (`user_id`) REFERENCES `tbluser` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `tbltask` (
 
 LOCK TABLES `tbltask` WRITE;
 /*!40000 ALTER TABLE `tbltask` DISABLE KEYS */;
-INSERT INTO `tbltask` VALUES (4,'test','0','0',2,NULL);
+INSERT INTO `tbltask` VALUES (1,'Redirect mainframe errors','10','2 00:00:00.000000',1,5),(2,'Test','1','0 00:00:00.000000',1,NULL),(3,'Test','1','0 00:00:00.000000',1,NULL),(4,'Test','1','0 00:00:00.000000',1,NULL),(5,'Test','1','0 00:00:00.000000',1,NULL),(6,'Test2','2','0 00:00:00.000000',1,NULL);
 /*!40000 ALTER TABLE `tbltask` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ CREATE TABLE `tbluser` (
 
 LOCK TABLES `tbluser` WRITE;
 /*!40000 ALTER TABLE `tbluser` DISABLE KEYS */;
-INSERT INTO `tbluser` VALUES (1,'admin','2001-01-01 00:01:00','projectmanager',NULL,'admin','admin');
+INSERT INTO `tbluser` VALUES (1,'admin','2001-01-01 00:01:00','projectmanager',NULL,'admin','admin'),(2,'user','2001-01-01 00:01:00',NULL,NULL,'user','user'),(3,'pm','2001-01-01 00:01:00','projectmanager',NULL,'pm','pm'),(4,'nigga','1000-01-12 00:02:00',NULL,NULL,'nigga','bruh'),(5,'emp','2020-01-18 00:03:00','employee',NULL,'emp','emp');
 /*!40000 ALTER TABLE `tbluser` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -113,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-18 13:42:03
+-- Dump completed on 2020-03-25 18:05:17
