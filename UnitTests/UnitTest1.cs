@@ -67,7 +67,7 @@ namespace UnitTestMS
             var pm = c.AddProjectmanager("Jens", DateTime.Now, "Jens", "test");
 
             c.AddEmployeeToProject(pm, emp);
-            emp.Name = "Philip2";
+           
 
             c.UpdateUser(emp);
 

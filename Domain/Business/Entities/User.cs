@@ -4,11 +4,11 @@ namespace Domain.Business.Entities
 {
     public class User : Entity
     {
-        public DateTime Birthday;
-        public string Name;
-        public string Password;
+        public DateTime Birthday { get; internal set; }
+        public string Name { get; internal set; }
+        public string Password { get; internal set; }
 
-        public string Username;
+        public string Username { get; internal set; }
 
 
         public User(int id, string name, DateTime birthday,string username,string password) : base(id)

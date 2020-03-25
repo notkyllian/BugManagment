@@ -94,6 +94,11 @@ namespace Domain.Business
             return UserRepository.GetAll();
         }
 
+        public List<Employee> GetEmployees()
+        {
+            return UserRepository.GetAll().OfType<Employee>().ToList();
+        }
+
         #endregion
 
         #region Task

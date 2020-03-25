@@ -45,8 +45,11 @@
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <asp:LinkButton runat="server" CssClass="nav-link active" OnClick="OnClick"><i class="fas fa-tasks"></i><span>Tasks</span></asp:LinkButton>
+                    </li>
+                    <li class="nav-item" role="presentation">
                         <a class="nav-link active" href="Bugs.aspx">
-                            <i class="fas fa-tasks"></i><span>Tasks</span>
+                            <i class="fas fa-users"></i><span>Employees</span>
                         </a>
                     </li>
                 </ul>
@@ -76,10 +79,19 @@
     </div>
 </form>
 
-
+<script>
+    if (localStorage.getItem('navbarstatus') === "true") {
+        $("body").toggleClass("sidebar-toggled");
+        $(".sidebar").toggleClass("toggled");
+        if ($(".sidebar").hasClass("toggled")) {
+            $('.sidebar .collapse').collapse('hide');
+        };
+    }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
 <script src="/assets/js/theme.js"></script>
+
 </body>
 </html>

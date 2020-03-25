@@ -17,5 +17,12 @@ namespace WebApplication.projectmanager
             //else if (c.GetUser(Convert.ToInt32(Session["uid"])).GetType().Name.ToLower() != "projectmanager") Response.Redirect("~/Default.aspx"); // Check if role is user if not redirect to default page which will redirect to correct role page
 
         }
+
+        protected void OnClick(object sender, EventArgs e)
+        {
+            if(Session["bug"] != null) Session["bug"] = null;
+
+            Response.Redirect("Tasks.aspx");
+        }
     }
 }

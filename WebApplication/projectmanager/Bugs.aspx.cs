@@ -51,5 +51,21 @@ namespace WebApplication.projectmanager
             grvBugs.EditIndex = -1;
             grvBugs.DataBind();
         }
+
+        protected void grvBugs_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            var grvRow = grvBugs.Rows[e.RowIndex];
+            var bugId = _bugs[grvRow.DataItemIndex].Id;
+            _c.RemoveBug(bugId);
+            grvBugs.DataBind();
+        }
+
+        protected void grvBugs_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            int id = (int) grvBugs.SelectedValue;
+            Bug bug = _c.GetBug(id);
+            Session["bug"] = bug;
+            Response.Redirect("Tasks.aspx");
+        }
     }
 }
